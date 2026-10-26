@@ -1,0 +1,27 @@
+{"kind":"deck","id":"pr/azb7wo","name":"Deck"}
+{"kind":"layout","layoutId":"bf58931b-8e20-4630-a873-292e5af26d8b","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"5d3352a6-bac8-4058-9338-4505ae60e231","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/m7p6id","slide":1,"title":"网页 MVP 界面与本地闭环","textShapes":11}
+{"kind":"textbox","id":"sh/rqpk3254","slide":1,"text":"网页 MVP 界面与本地闭环","textPreview":"网页 MVP 界面与本地闭环","textChars":14,"textLines":1,"bbox":[40,28,660,46]}
+{"kind":"textbox","id":"sh/sry1c76p","slide":1,"text":"第四部分重点展示页","textPreview":"第四部分重点展示页","textChars":9,"textLines":1,"bbox":[1030,34,200,28]}
+{"kind":"shape","id":"sh/dc725cna","slide":1,"bbox":[38,92,278,554]}
+{"kind":"textbox","id":"sh/edgjehov","slide":1,"text":"当前网页采用 B/S 本地 MVP","textPreview":"当前网页采用 B/S 本地 MVP","textChars":17,"textLines":1,"bbox":[58,116,236,60]}
+{"kind":"textbox","id":"sh/fe9k7m5g","slide":1,"text":"Browser 客户端\n采集摄像头画面，按帧发送 JPEG。\n\nPython Server\n在本机运行 MediaPipe，计算关键点、关节角和评分。\n\nESP32 手环\n服务器通过 USB 串口发送震动方向。\n\n现阶段是 localhost HTTP；跨设备部署时建议 HTTPS 或 WSS。","textPreview":"Browser 客户端 | 采集摄像头画面，按帧发送 JPEG。 |  | Python Server | 在本机运行 MediaPipe，计算关键点、关节角和评分。 |  | ESP32 手环 | 服务器通过 USB 串口发送震动方向。 |  | 现阶段是 localho...","textChars":148,"textLines":10,"bbox":[58,196,236,350]}
+{"kind":"textbox","id":"sh/0fi1g76l","slide":1,"text":"关键结论：当前传输的是摄像头帧，不是浏览器端已计算好的肢体点阵。","textPreview":"关键结论：当前传输的是摄像头帧，不是浏览器端已计算好的肢体点阵。","textChars":32,"textLines":1,"bbox":[58,570,232,52]}
+{"kind":"shape","id":"sh/1gr29cn6","slide":1,"bbox":[344,90,380,162]}
+{"kind":"textbox","id":"sh/2h0jihor","slide":1,"text":"入口与主题","textPreview":"入口与主题","textChars":5,"textLines":1,"bbox":[348,93,372,24]}
+{"kind":"shape","id":"sh/3axkjyl8","slide":1,"bbox":[736,90,500,326]}
+{"kind":"textbox","id":"sh/2po3at4n","slide":1,"text":"实时练习工作台","textPreview":"实时练习工作台","textChars":7,"textLines":1,"bbox":[740,93,492,24]}
+{"kind":"shape","id":"sh/ob6lc3mt","slide":1,"bbox":[344,262,380,194]}
+{"kind":"textbox","id":"sh/fmdkfe5c","slide":1,"text":"关节偏差列表","textPreview":"关节偏差列表","textChars":6,"textLines":1,"bbox":[348,265,372,24]}
+{"kind":"shape","id":"sh/1ov2hon2","slide":1,"bbox":[344,470,380,160]}
+{"kind":"textbox","id":"sh/gnml8jmx","slide":1,"text":"左手环引导","textPreview":"左手环引导","textChars":5,"textLines":1,"bbox":[348,473,372,24]}
+{"kind":"shape","id":"sh/yh83id4v","slide":1,"bbox":[736,434,500,196]}
+{"kind":"textbox","id":"sh/adsnaho3","slide":1,"text":"四步工作原理","textPreview":"四步工作原理","textChars":6,"textLines":1,"bbox":[740,437,492,24]}
+{"kind":"textbox","id":"sh/wza5cr69","slide":1,"text":"截图来源：项目 web/index.html，按页面模块分块截取。","textPreview":"截图来源：项目 web/index.html，按页面模块分块截取。","textChars":33,"textLines":1,"bbox":[40,666,760,22]}
+{"kind":"image","id":"im/ahcjq9cn","slide":1,"name":"","geometry":"roundRect","alt":"入口与主题","bbox":[348,122,372,128]}
+{"kind":"image","id":"im/a9wzetkf","slide":1,"name":"","geometry":"roundRect","alt":"实时练习工作台","bbox":[740,122,492,292]}
+{"kind":"image","id":"im/l07it832","slide":1,"name":"","geometry":"roundRect","alt":"关节偏差列表","bbox":[348,294,372,160]}
+{"kind":"image","id":"im/0juh8j2d","slide":1,"name":"","geometry":"roundRect","alt":"左手环引导","bbox":[348,502,372,126]}
+{"kind":"image","id":"im/gzmxcfe1","slide":1,"name":"","geometry":"roundRect","alt":"四步工作原理","bbox":[740,466,492,162]}
+{"kind":"notes","id":"nt/m7p6id","slide":1,"text":"本页用于第四部分网页 MVP 汇报。当前网页为 B/S 本地 MVP：浏览器端负责摄像头采集和界面展示，本机 Python 服务通过 /api/frame 接收 JPEG 帧并运行 MediaPipe、静止检测、Warrior II 角度评分和触觉指令生成，再通过 USB Serial 控制 ESP32 左手环。当前演示采用 localhost HTTP；若后续让手机或其他电脑作为客户端访问，应使用 HTTPS 或 WSS 传输摄像头帧或人体关键点数据。"}

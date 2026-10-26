@@ -1,0 +1,6 @@
+matplotlib==3.10.8
+mediapipe==0.10.9
+numpy==1.24.3
+opencv-contrib-python==4.8.1.78
+pyserial==3.5
+scipy==1.15.3

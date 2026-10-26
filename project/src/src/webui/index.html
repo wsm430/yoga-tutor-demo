@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yoga Tutor 瑜伽动作纠正</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🧘</span>
+      <div>
+        <h1>Yoga Tutor</h1>
+        <p>视觉姿态识别 + 触觉腕带纠正</p>
+      </div>
+    </div>
+
+    <button id="poseButton" class="pose-button" type="button" title="切换体式">
+      <span class="muted">当前体式</span>
+      <strong id="poseLabel">加载中…</strong>
+      <span class="chev">▾</span>
+    </button>
+
+    <div class="band-status">
+      <span id="bandPill" class="pill pill-off"><i></i><span id="bandText">腕带：检查中</span></span>
+      <button id="reconnectBtn" class="ghost" type="button">重新连接</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="stage-col">
+      <div class="stage" id="stage">
+        <video id="video" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+
+        <div class="placeholder" id="placeholder">
+          <div class="ph-icon">📷</div>
+          <p>点击下方「开始」打开摄像头</p>
+          <p class="muted small">站到离镜头 2–3 米处，让全身都在画面里</p>
+        </div>
+
+        <div class="banner" id="banner">
+          <svg class="ring" viewBox="0 0 44 44" aria-hidden="true">
+            <circle cx="22" cy="22" r="19" class="ring-bg"></circle>
+            <circle cx="22" cy="22" r="19" class="ring-fg" id="ringFg"></circle>
+          </svg>
+          <div class="banner-text">
+            <strong id="bannerTitle">等待开始</strong>
+            <span id="bannerSub">—</span>
+          </div>
+          <div class="score" id="scoreBox">
+            <span id="scoreValue">--</span>
+            <small>分</small>
+          </div>
+        </div>
+
+        <div class="perf" id="perf"></div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn" class="primary" type="button">▶ 开始</button>
+        <button id="resetBtn" type="button" title="快捷键 R">↺ 重新计时</button>
+        <label class="toggle"><input type="checkbox" id="mirrorChk" checked> 镜像画面</label>
+        <label class="toggle"><input type="checkbox" id="voiceChk"> 语音提示</label>
+        <label class="toggle"><input type="checkbox" id="hapticChk" checked> 腕带震动</label>
+        <select id="cameraSel" title="选择摄像头"></select>
+      </div>
+    </section>
+
+    <aside class="side-col">
+      <div class="card guide-card" id="guideCard">
+        <div class="card-head">
+          <h2>纠正提示</h2>
+          <span class="tag" id="stateTag">未开始</span>
+        </div>
+        <p class="guide-main" id="guideMain">开始后，保持姿势约 1 秒即可开始评估。</p>
+        <div class="band-row">
+          <div class="band" id="bandDiagram" title="点击马达可单独测试">
+            <div class="band-ring"></div>
+            <button class="motor m2" data-motor="2" type="button">上<br><small>M2</small></button>
+            <button class="motor m1" data-motor="1" type="button">左<br><small>M1</small></button>
+            <button class="motor m3" data-motor="3" type="button">右<br><small>M3</small></button>
+            <button class="motor m0" data-motor="0" type="button">下<br><small>M0</small></button>
+            <span class="band-center">左腕</span>
+          </div>
+          <div class="band-info">
+            <p id="hapticLine" class="muted">腕带：未震动</p>
+            <p class="muted small">点击圆点可单独测试该马达。灰色带 ✕ 的马达未接通，提示只用文字和语音给出。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>标准姿势</h2>
+          <span class="muted small" id="refName"></span>
+        </div>
+        <div class="ref-img"><img id="refImg" alt="标准姿势参考图"><span id="refEmpty" class="muted">暂无参考图</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>关节角度</h2>
+          <span class="muted small" id="correctCount"></span>
+        </div>
+        <div class="joints" id="joints"></div>
+        <p class="legend muted small"><i class="lg lg-std"></i>标准 <i class="lg lg-tol"></i>容差 <i class="lg lg-cur"></i>当前</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>本次练习</h2><button id="clearStats" class="link" type="button">清零</button></div>
+        <div class="stats">
+          <div><span id="statTime">0:00</span><small>练习时长</small></div>
+          <div><span id="statGood">0:00</span><small>达标时长</small></div>
+          <div><span id="statBest">--</span><small>最高分</small></div>
+          <div><span id="statAvg">--</span><small>平均分</small></div>
+        </div>
+        <canvas id="spark" height="70"></canvas>
+      </div>
+    </aside>
+  </main>
+
+  <div class="modal" id="poseModal" hidden>
+    <div class="modal-box">
+      <div class="card-head">
+        <h2>选择体式</h2>
+        <button class="ghost" id="closeModal" type="button">关闭</button>
+      </div>
+      <div class="pose-grid" id="poseGrid"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

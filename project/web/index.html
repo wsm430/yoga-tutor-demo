@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Yoga Tutor · Warrior II 实时矫正</title>
+  <meta name="description" content="基于视觉感知和多方向触觉引导的实时动作矫正系统">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="app/globals.css">
+</head>
+<body>
+<main>
+  <nav class="nav shell"><a class="brand" href="#top"><span>YT</span>Yoga Tutor</a><div class="nav-links"><a href="#practice">实时练习</a><a href="#how">工作原理</a><a href="#hardware">触觉手环</a></div><span class="local-badge"><i></i> 本地 MVP</span></nav>
+  <section id="top" class="hero shell"><div><p class="eyebrow">视觉感知 × 单腕触觉引导</p><h1>看见偏差，<br><em>感受</em>正确方向。</h1></div><div class="hero-copy"><p>选择 Warrior II，摄像头提取全身关键点；身体静止后，系统比较八个关节角，并把最优先的纠正方向发送到左手环。</p><a class="button primary" href="#practice">开始一次练习 <span>↗</span></a></div></section>
+  <section id="practice" class="studio-band"><div class="shell">
+    <div class="section-head"><div><p class="eyebrow">LIVE STUDIO</p><h2>实时姿势工作台</h2></div><div class="fixed-mode"><i></i> Warrior II · 手动目标</div></div>
+    <div class="studio-grid" id="studio-workspace">
+      <div class="camera-card"><div class="camera-top"><span><i id="camera-dot"></i> LAPTOP CAMERA</span><span id="camera-size">等待摄像头</span></div><div class="camera-stage"><video id="camera" autoplay muted playsinline></video><canvas id="pose-overlay" class="pose-overlay"></canvas><div class="camera-empty" id="camera-empty"><div class="aperture">◎</div><strong>摄像头尚未开启</strong><p>站在画面中央，确保全身可见</p></div><div class="scan-frame" id="scan" hidden><b class="c1"></b><b class="c2"></b><b class="c3"></b><b class="c4"></b></div><div class="hold-overlay" id="hold" hidden><span>保持不动</span><strong id="hold-value">0%</strong></div><div class="pose-tag" id="pose-tag" hidden><i></i> 正在评估 · <span>Warrior II Pose</span></div></div><div class="camera-actions"><button class="button primary" id="camera-button">开启摄像头</button><button class="button dark" id="reset-button">重新评估</button></div><p class="error" id="error"></p></div>
+      <aside class="control-stack"><div class="pose-card card"><label for="pose">目标姿势</label><select id="pose" disabled><option>Warrior II Pose</option></select><div class="pose-preview" id="pose-preview"><img id="pose-image" src="poses/Warrior%20II%20Pose.jpg" alt="Warrior II Pose 标准姿势参考"><div class="preview-shade"></div><span class="preview-mode">当前标准参考</span><strong id="preview-name">Warrior II Pose</strong><small>静止 1.2 秒后，与这张标准图的八个关节角比较</small></div></div><div class="score-card card dark-card"><div><span>当前评分</span><small id="score-state">等待摄像头</small></div><strong id="score">—</strong><div class="score-track"><i id="score-bar"></i></div><p id="score-copy">全身进入画面并保持 Warrior II 姿势。</p></div></aside>
+    </div>
+    <div class="feedback-grid"><div class="feedback card"><div class="card-title"><div><p class="eyebrow">JOINT ANALYSIS</p><h3>关节偏差</h3></div><span id="joint-summary">等待评估</span></div><div class="joint-list" id="joints"></div></div>
+      <div id="hardware" class="haptic card dark-card"><div class="card-title"><div><p class="eyebrow light">HAPTIC GUIDANCE</p><h3>左手环引导</h3></div><span class="connection offline" id="connection"><i></i> 检查连接中</span></div><div class="band-visuals single"><div class="wrist"><span>左手腕 · 已验证硬件方向</span><div class="band"><i class="motor up" data-direction="up">↑</i><i class="motor right" data-direction="right">→</i><i class="motor down" data-direction="down">↓</i><i class="motor left" data-direction="left">←</i><b id="band-label">等待<br>评估</b></div></div></div><p class="haptic-note"><span>01</span><span id="haptic-copy">只发送当前偏差最大的一个方向：上 M2、下 M0、左 M1、右 M3。</span></p></div>
+    </div>
+  </div></section>
+  <section id="how" class="how shell"><p class="eyebrow">HOW IT WORKS</p><h2>一次评估，四个步骤。</h2><div class="steps"><article><span>01</span><h3>捕捉</h3><p>浏览器摄像头把画面发送到本机 MediaPipe，提取 33 个人体关键点。</p></article><article><span>02</span><h3>稳定</h3><p>1€ Filter 抑制抖动，静止检测等待动作稳定 1.2 秒。</p></article><article><span>03</span><h3>比较</h3><p>八个关节角与 Warrior II 标准图片逐一比较并量化评分。</p></article><article><span>04</span><h3>引导</h3><p>最大的角度偏差映射为左手环上、下、左、右中的一个震动方向。</p></article></div></section>
+  <footer><div class="shell"><div class="brand inverse"><span>YT</span>Yoga Tutor</div><p>Warrior II · 手动选择 · 左手环 · 笔记本摄像头</p><small>LOCAL MVP · 2026</small></div></footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
